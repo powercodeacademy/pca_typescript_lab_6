@@ -1,0 +1,29 @@
+{
+  "name": "pca_typescript_lab_6",
+  "version": "1.0.0",
+  "description": "Provides practice for learning basic typescript",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -r ts-node/register \"test/**/*.test.ts\""
+  },
+  "author": "Mike",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.10",
+    "chai": "^4.3.7",
+    "chai_typescript_type_annotation_tests": "^1.1.6",
+    "mocha": "^10.2.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.0"
+  },
+  "keywords": [
+    "typescript",
+    "lab",
+    "mocha",
+    "chai"
+  ]
+}
