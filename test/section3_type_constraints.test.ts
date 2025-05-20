@@ -30,4 +30,48 @@ describe("Lab 6 — Section 3: Type Constraints", () => {
     context.logLength("hello");
     expect(logs[0]).to.equal("5");
   });
+  it("should log the length of an empty array", () => {
+    context.logLength([]);
+    expect(logs[0]).to.equal("0");
+  });
+
+  it("should log the length of a large array", () => {
+    context.logLength(Array(100).fill(0));
+    expect(logs[0]).to.equal("100");
+  });
+
+  it("should log the length of an empty string", () => {
+    context.logLength("");
+    expect(logs[0]).to.equal("0");
+  });
+
+  it("should log the length of a custom object with length property", () => {
+    context.logLength({ length: 42 });
+    expect(logs[0]).to.equal("42");
+  });
+
+  it("should log the length of a string with special characters", () => {
+    context.logLength("Hello, 世界!");
+    expect(logs[0]).to.equal("10");
+  });
+
+  it("should log the length of a typed array", () => {
+    context.logLength(new Uint8Array([1, 2, 3, 4]));
+    expect(logs[0]).to.equal("4");
+  });
+
+  it("should log the length of a Map with size property converted to length", () => {
+    context.logLength({
+      length: new Map([
+        ["a", 1],
+        ["b", 2],
+      ]).size,
+    });
+    expect(logs[0]).to.equal("2");
+  });
+
+  it("should log the length of an object with numeric length", () => {
+    context.logLength({ length: 123.45 });
+    expect(logs[0]).to.equal("123.45");
+  });
 });

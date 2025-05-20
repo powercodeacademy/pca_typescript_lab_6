@@ -27,4 +27,39 @@ describe("Lab 6 — Section 4: Utility Types", () => {
     expect(context.pickUser).to.include.keys("name");
     expect(context.pickUser).to.not.have.property("id");
   });
+  it("should not be able to modify readonly user properties", () => {
+    const readonlyUserTest = { ...context.readonlyUser };
+    expect(() => {
+      readonlyUserTest.name = "Changed Name";
+    }).to.throw();
+  });
+
+  it("should define User type with required id, name, and email properties", () => {
+    expect(context.user).to.have.all.keys("id", "name", "email");
+    expect(context.user.id).to.exist;
+    expect(context.user.name).to.exist;
+    expect(context.user.email).to.exist;
+  });
+
+  it("should allow partial user with missing properties", () => {
+    expect(context.partialUser).to.not.have.all.keys("id", "name", "email");
+    expect(Object.keys(context.partialUser).length).to.be.lessThan(3);
+  });
+
+  it("should define pick user with only name property", () => {
+    expect(Object.keys(context.pickUser).length).to.equal(1);
+    expect(context.pickUser.name).to.exist;
+    expect(context.pickUser.email).to.not.exist;
+    expect(context.pickUser.id).to.not.exist;
+  });
+
+  it("should define readonly user with all expected properties", () => {
+    expect(context.readonlyUser).to.have.all.keys("id", "name", "email");
+  });
+
+  it("should have correct types for user properties", () => {
+    expect(typeof context.user.id).to.be.oneOf(["string", "number"]);
+    expect(typeof context.user.name).to.equal("string");
+    expect(typeof context.user.email).to.equal("string");
+  });
 });
