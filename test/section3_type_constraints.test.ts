@@ -3,13 +3,14 @@ import * as ts from "typescript";
 import { readFileSync } from "fs";
 import { join } from "path";
 import vm from "vm";
+import * as type_annotation from "chai_typescript_type_annotation_tests";
 
 describe("Lab 6 — Section 3: Type Constraints", () => {
   let context: any = {};
   let logs: string[] = [];
+  const filePath = join(__dirname, "../src/section3_type_constraints.ts");
 
   before(() => {
-    const filePath = join(__dirname, "../src/section3_type_constraints.ts");
     const tsCode = readFileSync(filePath, "utf8");
     const jsCode = ts.transpile(tsCode);
     context.console = { log: (msg: string) => logs.push(msg) };
@@ -20,6 +21,16 @@ describe("Lab 6 — Section 3: Type Constraints", () => {
   beforeEach(() => {
     logs = [];
   });
+
+  type_annotation.matchFunctionParameterTypeAnnotation(filePath, "logLength", [
+    "T",
+  ]);
+
+  type_annotation.expectFunctionReturnTypeAnnotation(
+    filePath,
+    "logLength",
+    "void"
+  );
 
   it("should log the length of an array", () => {
     context.logLength([1, 2, 3]);

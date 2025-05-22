@@ -3,17 +3,37 @@ import * as ts from "typescript";
 import { readFileSync } from "fs";
 import { join } from "path";
 import vm from "vm";
+import * as type_annotation from "chai_typescript_type_annotation_tests";
 
 describe("Lab 6 — Section 4: Utility Types", () => {
   let context: any = {};
+  const filePath = join(__dirname, "../src/section4_utility_types.ts");
 
   before(() => {
-    const filePath = join(__dirname, "../src/section4_utility_types.ts");
     const tsCode = readFileSync(filePath, "utf8");
     const jsCode = ts.transpile(tsCode);
     vm.createContext(context);
     vm.runInContext(jsCode, context);
   });
+
+  type_annotation.expectTypeAliasPropertyTypeAnnotation(
+    filePath,
+    "User",
+    "id",
+    "number"
+  );
+  type_annotation.expectTypeAliasPropertyTypeAnnotation(
+    filePath,
+    "User",
+    "name",
+    "string"
+  );
+  type_annotation.expectTypeAliasPropertyTypeAnnotation(
+    filePath,
+    "User",
+    "email",
+    "string"
+  );
 
   it("should define a partial user object", () => {
     expect(context.partialUser).to.include.keys("id", "name");

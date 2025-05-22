@@ -14,9 +14,11 @@
   "devDependencies": {
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.10",
+    "@types/sinon": "^17.0.4",
     "chai": "^4.3.7",
-    "chai_typescript_type_annotation_tests": "^1.1.6",
+    "chai_typescript_type_annotation_tests": "^1.4.2",
     "mocha": "^10.2.0",
+    "sinon": "^20.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.0"
   },

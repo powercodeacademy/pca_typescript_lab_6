@@ -3,17 +3,32 @@ import * as ts from "typescript";
 import { readFileSync } from "fs";
 import { join } from "path";
 import vm from "vm";
+import * as type_annotation from "chai_typescript_type_annotation_tests";
 
 describe("Lab 6 — Section 2: Generic Classes", () => {
   let context: any = {};
+  const filePath = join(__dirname, "../src/section2_generic_classes.ts");
 
   before(() => {
-    const filePath = join(__dirname, "../src/section2_generic_classes.ts");
     const tsCode = readFileSync(filePath, "utf8");
     const jsCode = ts.transpile(tsCode);
     vm.createContext(context);
     vm.runInContext(jsCode, context);
   });
+
+  type_annotation.expectClassMethodReturnTypeAnnotation(
+    filePath,
+    "Box",
+    "getValue",
+    "T"
+  );
+
+  type_annotation.expectClassPropertyTypeAnnotation(
+    filePath,
+    "Box",
+    "value",
+    "T"
+  );
 
   it("should store and return a value using Box", () => {
     const box = new context.Box("test");
