@@ -5,3 +5,15 @@
 // - have a method `getValue()` that returns the value
 
 // Your code here 👇
+
+class Box<T> {
+  value: T;
+
+  constructor(value: T) {
+    this.value = value;
+  }
+
+  getValue(): T {
+    return this.value;
+  }
+}
