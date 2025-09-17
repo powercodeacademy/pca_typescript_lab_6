@@ -1,8 +1,20 @@
-// TASK:
-// Define a `User` type with `id`, `name`, and `email`
-// Create the following:
-// - a `Partial<User>`
-// - a `Readonly<User>`
-// - a `Pick<User, "name">`
+// Define a User type
+type User = {
+  id: number
+  name: string
+  email: string
+}
 
-// Your code here 👇
+// Create utility type examples
+type PartialUser = Partial<User>
+type ReadonlyUser = Readonly<User>
+type UserName = Pick<User, "name">
+
+// Create instances to demonstrate the utility types
+let partialUser: PartialUser = { id: 1, name: "Alice" }
+let readonlyUser: ReadonlyUser = {
+  id: 2,
+  name: "Bob",
+  email: "bob@example.com",
+}
+let pickUser: UserName = { name: "Charlie" }

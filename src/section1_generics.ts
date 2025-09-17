@@ -1,5 +1,8 @@
-// TASK:
-// Write a generic function `identity<T>(value: T): T`
-// Call it with both a string and a number
+// Generic function that returns whatever you give it
+function identity<T>(value: T): T {
+  return value
+}
 
-// Your code here 👇
+// Call the function with different types
+identity("hello")
+identity(42)

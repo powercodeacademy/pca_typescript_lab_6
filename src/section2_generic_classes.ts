@@ -1,7 +1,12 @@
-// TASK:
-// Create a generic class `Box<T>`
-// It should:
-// - store a value of type T
-// - have a method `getValue()` that returns the value
+// Generic class that can hold any type of value
+class Box<T> {
+  private value: T
 
-// Your code here 👇
+  constructor(value: T) {
+    this.value = value
+  }
+
+  getValue(): T {
+    return this.value
+  }
+}
