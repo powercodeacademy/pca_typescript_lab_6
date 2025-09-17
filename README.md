@@ -17,14 +17,14 @@ By the end of this lab, you'll be comfortable with:
 
 ## Getting Started
 
-First, fork and clone the repository and let's set up your environment:
+First, clone this repository to your local machine and install the required dependencies:
 
 ```bash
 npm install
 npm test
 ```
 
-The tests will guide you through each concept. Don't worry if they fail initially—that's how you'll learn what TypeScript expects!
+You should see test output showing which tests are passing and failing. Don't worry if tests are failing initially - that's expected! You'll be implementing the code to make them pass.
 
 ---
 
@@ -76,7 +76,27 @@ let result2 = identity(42) // Type: number
 let result3 = identity([1, 2, 3]) // Type: number[]
 ```
 
-**Try it yourself:** Open `src/section1_generics.ts` and create an `identity` function that takes any type and returns the same type. Then call it with both a string and a number.
+### Practice: Generic Functions
+
+**Your Task**: Open `src/section1_generics.ts` and complete the following:
+
+1. Create an `identity` function that:
+
+   - Takes a generic type parameter `T`
+   - Takes a parameter `value` of type `T`
+   - Returns the same value of type `T`
+
+2. Test the function with different types
+
+**Expected behavior**:
+
+```typescript
+console.log(identity("hello")) // "hello"
+console.log(identity(42)) // 42
+console.log(identity([1, 2, 3])) // [1, 2, 3]
+```
+
+**Hint**: Use angle brackets `<T>` to define the generic type parameter. The function will work with any type you give it.
 
 ---
 
@@ -122,7 +142,27 @@ Generic classes are perfect for:
 - Implementing patterns like the Repository pattern
 - Creating type-safe wrappers around external libraries
 
-**Your turn:** In `src/section2_generic_classes.ts`, create a `Box<T>` class that stores a value of type `T` and has a `getValue()` method that returns it.
+### Practice: Generic Classes
+
+**Your Task**: Open `src/section2_generic_classes.ts` and complete the following:
+
+1. Create a `Box<T>` class with:
+
+   - `value`: private property of type `T`
+   - `constructor(value: T)` that sets the value
+   - `getValue()`: method that returns the value
+
+2. Test the class with different types
+
+**Expected behavior**:
+
+```typescript
+console.log(stringBox.getValue()) // "hello"
+console.log(numberBox.getValue()) // 42
+console.log(booleanBox.getValue()) // true
+```
+
+**Hint**: Use `<T>` in the class definition to make it generic. The class can hold any type you specify.
 
 ---
 
@@ -172,7 +212,30 @@ Type constraints are perfect for:
 - Building APIs that work with objects that share common interfaces
 - Preventing runtime errors by catching type mismatches at compile time
 
-**Challenge:** In `src/section3_type_constraints.ts`, write a function `logLength<T extends { length: number }>(item: T)` that prints the length of any item that has a length property.
+### Practice: Type Constraints
+
+**Your Task**: Open `src/section3_type_constraints.ts` and complete the following:
+
+1. Write a `logLength` function that:
+
+   - Takes a generic type parameter `T` that extends `{ length: number }`
+   - Takes a parameter `item` of type `T`
+   - Prints the length of the item
+
+2. Test the function with different types that have a length property
+
+**Expected behavior**:
+
+```typescript
+logLength("hello") // "The length is: 5"
+logLength([1, 2, 3]) // "The length is: 3"
+logLength({ length: 5, data: "test" }) // "The length is: 5"
+
+// This would cause an error:
+// logLength(42) // Error: number doesn't have length property
+```
+
+**Hint**: Use `T extends { length: number }` to constrain the generic type. This ensures the type has a `length` property.
 
 ---
 
@@ -262,7 +325,25 @@ Utility types are perfect for:
 - Building type-safe APIs that work with subsets of data
 - Transforming types for different use cases
 
-**Your turn:** In `src/section4_utility_types.ts`, define a `User` type with `id`, `name`, and `email` properties, then create examples of `Partial<User>`, `Readonly<User>`, and `Pick<User, "name">`.
+### Practice: Utility Types
+
+**Your Task**: Open `src/section4_utility_types.ts` and complete the following:
+
+1. Define a `User` type with:
+
+   - `id`: number
+   - `name`: string
+   - `email`: string
+
+2. Create examples of utility types:
+
+   - `PartialUser`: using `Partial<User>`
+   - `ReadonlyUser`: using `Readonly<User>`
+   - `UserName`: using `Pick<User, "name">`
+
+3. Create variables that demonstrate each utility type
+
+**Hint**: Use `Partial<T>`, `Readonly<T>`, and `Pick<T, K>` to transform your base type.
 
 ---
 
@@ -314,7 +395,39 @@ These utility functions are perfect for:
 - Implementing common patterns in a type-safe way
 - Creating libraries that work with any type
 
-**Bonus challenge:** In `src/section5_bonus_generic_utils.ts`, create a `merge<T, U>(obj1: T, obj2: U): T & U` function that combines two objects, and a `wrapInArray<T>(value: T): T[]` function that puts any value into an array.
+### Practice: Custom Generic Utilities (Bonus Challenge)
+
+**Your Task**: Open `src/section5_bonus_generic_utils.ts` and complete the following:
+
+1. Create a `merge` function that:
+
+   - Takes two generic type parameters `T` and `U`
+   - Takes two parameters `obj1` of type `T` and `obj2` of type `U`
+   - Returns a combined object of type `T & U`
+
+2. Create a `wrapInArray` function that:
+
+   - Takes a generic type parameter `T`
+   - Takes a parameter `value` of type `T`
+   - Returns an array containing that value
+
+3. Test both functions
+
+**Expected behavior**:
+
+```typescript
+let fullProfile = merge(person, contact)
+console.log(fullProfile.name) // "Alice"
+console.log(fullProfile.email) // "alice@example.com"
+
+let wrappedString = wrapInArray("hello")
+let wrappedNumber = wrapInArray(42)
+
+console.log(wrappedString) // ["hello"]
+console.log(wrappedNumber) // [42]
+```
+
+**Hint**: Use the spread operator `...` to merge objects. Use square brackets `[value]` to create an array.
 
 ---
 
@@ -332,10 +445,6 @@ Generics, type constraints, and utility types are essential for writing maintain
 These concepts are especially important when building applications with complex data models, creating reusable components, or working with external APIs where you need to transform data between different formats.
 
 ---
-
-## Ready to Start?
-
-Open `src/section1_generics.ts` and begin! The tests will guide you through each concept. Remember: generics are here to help you write more flexible, reusable code while maintaining TypeScript's type safety. Embrace the power—it's your friend! 🚀
 
 ### Common Troubleshooting
 
